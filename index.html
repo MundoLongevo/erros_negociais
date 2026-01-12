@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mestre da Negociação: Treinamento Master</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --p:#6c5ce7; --s:#fd9644; --a:#00d2d3; --d:#ff7675; --sc:#2ecc71; --dk:#2d3436; --bg:#f8f9fa; }
+        body { font-family:'Segoe UI',sans-serif; background:var(--bg); margin:0; color:var(--dk); line-height:1.4; }
+        header { background:linear-gradient(135deg,var(--p),var(--a)); color:white; padding:30px 20px; text-align:center; position:sticky; top:0; z-index:1000; clip-path:polygon(0 0, 100% 0, 100% 90%, 0 100%); }
+        #pb { width:220px; height:10px; background:rgba(255,255,255,0.3); border-radius:10px; margin:10px auto; overflow:hidden; }
+        #pf { width:0%; height:100%; background:var(--s); transition:0.5s; }
+        main { max-width:1100px; margin:0 auto; padding:20px; }
+        .title { color:var(--p); text-align:center; margin:30px 0 15px; font-size:1.6rem; }
+        .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:15px; }
+        .card { background:white; padding:15px; border-radius:15px; box-shadow:0 4px 10px rgba(0,0,0,0.05); text-align:center; cursor:pointer; transition:0.3s; border-top:5px solid transparent; }
+        .card:hover { transform:translateY(-5px); box-shadow:0 8px 20px rgba(0,0,0,0.1); }
+        .card.erro { border-top-color:var(--d); }
+        .card.valor { border-top-color:var(--sc); }
+        .card i { font-size:1.8rem; margin-bottom:8px; }
+        .card.erro i { color:var(--d); }
+        .card.valor i { color:var(--sc); }
+        .card h3 { margin:5px 0; font-size:1.1rem; }
+        .card p { font-size:0.85rem; color:#636e72; margin:0; }
+        .quiz-section { background:var(--dk); color:white; padding:35px 20px; border-radius:25px; margin:40px 0; text-align:center; }
+        .quiz-opt { display:block; width:100%; max-width:500px; margin:10px auto; padding:12px; background:transparent; border:2px solid var(--a); color:var(--a); border-radius:10px; cursor:pointer; font-weight:bold; }
+        .quiz-opt:hover { background:var(--a); color:var(--dk); }
+        #certificate { display:none; background:white; border:10px double var(--p); padding:30px; text-align:center; color:var(--dk); }
+        .nota { font-size:3rem; font-weight:bold; color:var(--p); border:2px solid var(--p); display:inline-block; padding:5px 30px; border-radius:12px; margin:10px 0; }
+        #gabarito { margin-top:25px; text-align:left; max-width:700px; margin:auto; padding:20px; background:#fff; border-radius:10px; border:1px solid #ddd; display:none; }
+        .gab-item { margin-bottom:12px; border-bottom:1px solid #eee; padding-bottom:8px; }
+        .correto { color:var(--sc); font-weight:bold; }
+        .errado { color:var(--d); font-weight:bold; }
+        .btn { background:var(--sc); color:white; border:none; padding:12px 25px; border-radius:50px; font-weight:bold; cursor:pointer; margin:10px; }
+        .btn-redo { background:var(--p); }
+        @media print { header, .quiz-section, .btn, .title, .grid { display:none !important; } #certificate, #gabarito { display:block !important; } }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Negociação Estratégica</h1>
+        <div id="pb"><div id="pf"></div></div>
+        <p>Clique nos cards para estudar e liberar o Quiz final!</p>
+    </header>
+    <main>
+        <h2 class="title">1. Galeria de Erros Estratégicos (12 Armadilhas)</h2>
+        <div class="grid">
+            <div class="card erro" onclick="tk(3)"><i class="fas fa-eye-slash"></i><h3>Miopia</h3><p>Falta de preparo e BATNA.</p></div>
+            <div class="card erro" onclick="tk(3)"><i class="fas fa-divide"></i><h3>Soma Zero</h3><p>Pensar só no ganha-perde.</p></div>
+            <div class="card erro" onclick="tk(3)"><i class="fas fa-comment-slash"></i><h3>Sem Escuta</h3><p>Falar mais do que ouvir.</p></div>
+            <div class="card erro" onclick="tk(3)"><i class="fas fa-hand-holding-usd"></i><h3>Ceder Grátis</h3><p>Concessão sem troca.</p></div>
+            <div class="card erro" onclick="tk(3)"><i class="fas fa-bolt"></i><h3>Desgoverno</h3><p>Emoção acima da razão.</p></div>
+            <div class="card erro" onclick="tk(3)"><i class="fas fa-tag"></i><h3>Só Preço</h3><p>Ignorar o valor real.</p></div>
+            <div class="card erro" onclick="tk(3)"><i class="fas fa-bomb"></i><h3>Promessa Vã</h3><p>Compromisso irrealista.</p></div>
+            <div class="card erro" onclick="tk(3)"><i class="fas fa-anchor"></i><h3>Sem Âncora</h3><p>Aceitar acordos por desespero.</p></div>
+            <div class="card erro" onclick="tk(3)"><i class="fas fa-magic"></i><h3>Improviso</h3><p>Confiar apenas no carisma.</p></div>
+            <div class="card erro" onclick="tk(3)"><i class="fas fa-mask"></i><h3>Previsível</h3><p>Ser um alvo tático fácil.</p></div>
+            <div class="card erro" onclick="tk(3)"><i class="fas fa-hourglass-end"></i><h3>Pressa</h3><p>Fechar por ansiedade.</p></div>
+            <div class="card erro" onclick="tk(3)"><i class="fas fa-users-slash"></i><h3>Sem Perfil</h3><p>Não adaptar o tom ao outro.</p></div>
+        </div>
+
+        <h2 class="title">2. Caminhos para a Excelência (12 Estratégias)</h2>
+        <div class="grid">
+            <div class="card valor" onclick="tk(3)"><i class="fas fa-map"></i><h3>Preparo</h3><p>Mapeie metas e alternativas.</p></div>
+            <div class="card valor" onclick="tk(3)"><i class="fas fa-heart"></i><h3>Escuta</h3><p>Faça perguntas abertas.</p></div>
+            <div class="card valor" onclick="tk(3)"><i class="fas fa-plus"></i><h3>Cocriação</h3><p>Expanda o bolo para ambos.</p></div>
+            <div class="card valor" onclick="tk(3)"><i class="fas fa-balance-scale"></i><h3>Equanimidade</h3><p>Separe pessoas do problema.</p></div>
+            <div class="card valor" onclick="tk(3)"><i class="fas fa-star"></i><h3>Reputação</h3><p>Prometa menos, entregue mais.</p></div>
+            <div class="card valor" onclick="tk(3)"><i class="fas fa-project-diagram"></i><h3>Se... Então</h3><p>Use trocas estratégicas.</p></div>
+            <div class="card valor" onclick="tk(3)"><i class="fas fa-th-list"></i><h3>Matriz</h3><p>Troque prazos por descontos.</p></div>
+            <div class="card valor" onclick="tk(3)"><i class="fas fa-hourglass-half"></i><h3>Silêncio</h3><p>Domine o tempo e reflexão.</p></div>
+            <div class="card valor" onclick="tk(3)"><i class="fas fa-graduation-cap"></i><h3>Aprendizado</h3><p>Cada acordo é uma lição.</p></div>
+            <div class="card valor" onclick="tk(3)"><i class="fas fa-expand"></i><h3>Espaço Ético</h3><p>Escolha sua resposta com calma.</p></div>
+            <div class="card valor" onclick="tk(3)"><i class="fas fa-gavel"></i><h3>Legitimidade</h3><p>Use fatos e critérios objetivos.</p></div>
+            <div class="card valor" onclick="tk(3)"><i class="fas fa-shield-alt"></i><h3>BATNA Ativo</h3><p>Fortaleça suas alternativas.</p></div>
+        </div>
+
+        <section class="quiz-section">
+            <div id="q-box">
+                <h2 id="q-text">Iniciando Desafio...</h2>
+                <div id="q-opts"></div>
+                <p id="q-st" style="margin-top:15px; opacity:0.7"></p>
+            </div>
+            <div id="certificate">
+                <i class="fas fa-award" style="font-size:3rem; color:gold;"></i>
+                <h1>DESEMPENHO FINAL</h1>
+                <p id="feedback-msg"></p>
+                <div class="nota" id="grade">0</div><br>
+                <div id="gabarito"><h3>Revisão de Aprendizado</h3><div id="gab-list"></div></div>
+                <button class="btn" onclick="window.print()">Salvar PDF</button>
+                <button class="btn btn-redo" onclick="reset()">Refazer Teste</button>
+            </div>
+        </section>
+    </main>
+    <script>
+        let pr=0, cur=0, hits=0, uR=[];
+        const qts=[
+            {q:"O que é BATNA?", a:["Alternativa fora do acordo","Preço máximo","Pressão"], c:0},
+            {q:"A Soma Zero é ruim por quê?", a:["É rápida","Limita a criação de valor","É cara"], c:1},
+            {q:"A lógica SE/ENTÃO serve para:", a:["Trocas estratégicas","Ignorar o outro","Ceder tudo"], c:0},
+            {q:"Como descobrir a 'dor' do outro?", a:["Falando muito","Investigação Empática","Baixando o preço"], c:1},
+            {q:"A estratégia de Reputação foca em:", a:["Prometer menos e entregar mais","Negociar sem prazos","Ceder sempre"], c:0},
+            {q:"O silêncio ajuda a:", a:["Gerar medo","Refletir e obter dados","Encerrar cedo"], c:1},
+            {q:"A Matriz Variável serve para:", a:["Impostos","Moedas de troca além do preço","Logística"], c:1},
+            {q:"O poder de resposta (Frankl) reside:", a:["No dinheiro","No espaço entre estímulo e resposta","Na fala"], c:1},
+            {q:"Legitimidade usa critérios:", a:["Objetivos e fatos","Emocionais","De força"], c:0},
+            {q:"BATNA Ativo garante:", a:["Medo","Segurança e alternativas","Pressa"], c:1},
+            {q:"Equanimidade sugere separar:", a:["Pessoas do problema","Preço do produto","Lucro"], c:0},
+            {q:"Pressa no fechamento é gerada por:", a:["Preparo","Ansiedade e falta de foco","BATNA"], c:1}
+        ];
+        function tk(v){ pr+=v; if(pr>100) pr=100; document.getElementById('pf').style.width=pr+'%'; }
+        function loadQ(){
+            if(cur < qts.length){
+                const q=qts[cur]; document.getElementById('q-text').innerText=q.q;
+                document.getElementById('q-st').innerText=`Questão ${cur+1} de 12`;
+                const d=document.getElementById('q-opts'); d.innerHTML="";
+                q.a.forEach((o,i)=>{
+                    const b=document.createElement('button'); b.innerText=o; b.className="quiz-opt";
+                    b.onclick=()=>{ uR.push(i); if(i===q.c) hits++; cur++; tk(4); loadQ(); };
+                    d.appendChild(b);
+                });
+            } else { showRes(); }
+        }
+        function showRes(){
+            document.getElementById('q-box').style.display='none';
+            document.getElementById('certificate').style.display='block';
+            document.getElementById('gabarito').style.display='block';
+            const n = (hits / 12) * 10; document.getElementById('grade').innerText = n.toFixed(1);
+            let m="";
+            if(n<=3) m="Sofrível, dormiu nas aulas.";
+            else if(n<=5) m="Ruim, releia o material das aulas.";
+            else if(n<=7.9) m="Regular, está se arrastando, estude mais.";
+            else if(n<=9.9) m="Parabéns, releia o que errou.";
+            else m="O Jedi da Negociação - Vivaaaa!!!!";
+            document.getElementById('feedback-msg').innerText=m;
+            const g=document.getElementById('gab-list'); g.innerHTML="";
+            qts.forEach((q,i)=>{
+                const ac=uR[i]===q.c;
+                g.innerHTML+=`<div class='gab-item'><strong>${i+1}. ${q.q}</strong><br>Sua: <span class='${ac?'correto':'errado'}'>${q.a[uR[i]]}</span>${ac?'':`<br>Correta: <span class='correto'>${q.a[q.c]}</span>`}</div>`;
+            });
+            tk(100);
+        }
+        function reset(){ cur=0; hits=0; uR=[]; pr=50; document.getElementById('pf').style.width='50%'; document.getElementById('certificate').style.display='none'; document.getElementById('q-box').style.display='block'; loadQ(); }
+        window.onload=loadQ;
+    </script>
+</body>
+</html>
